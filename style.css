@@ -1,0 +1,23 @@
+.tpick{
+    position:relative;
+}
+#backCan{
+    border:1px solid red;
+    position:absolute;
+}
+#hourHand{
+    border:1px solid green;
+    position:absolute;
+    left:110px;
+    top:50px;
+    transform-origin:50% 70px;
+    transform:rotate(45deg);
+}
+#minutHand{
+    border:1px solid blue;
+    position:absolute;
+    left:110px;
+    top:30px;
+    transform-origin:50% 90px;
+    transform:rotate(120deg);
+}
