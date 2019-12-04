@@ -8,15 +8,17 @@ window.onload = () =>{
         hourHand;
         tpick;
         minutHand;
-        backCanv;
+        clock;
         centerX;
         centerY;
         hands = [];
         index = -1;
+        lastHourDeg = 0;
+        lastMinuteDeg = 0;
         
-        constructor(hourName, minutName,backCan){
+        constructor(hourName, minutName,clock){
             this.transform = this.getSupportedTransformProp();
-            /* this.backCanv = this.getEl(backCan); */
+            this.clock = this.getEl(clock);
             this.hourHand = this.getEl(hourName);
             this.minutHand = this.getEl(minutName);
             this.tpick = this.getEl('tpick');
@@ -82,32 +84,39 @@ window.onload = () =>{
             console.log('%c++','background:brown',deg);
             if(deg<0)deg+=360;
             this.rotateElm(this.hands[this.index],deg);
-                /* if(isHourHand){
-                    if((0<=deg&&deg<90&&270<lastHourDeg&&lastHourDeg<360)||(0<=lastHourDeg&&lastHourDeg<90&&270<deg&&deg<360))isPM=!isPM;
-                    lastHourDeg=deg;
-                    lastMinuteDeg=deg%30*12;
-                    rotateElm(minuteHand,lastMinuteDeg)
+                if(this.hands[this.index] === this.hourHand){
+                    //if((0<=deg&&deg<90&&270<this.lastHourDeg&&this.lastHourDeg<360)||(0<=this.lastHourDeg&&this.lastHourDeg<90&&270<deg&&deg<360))isPM=!isPM;
+                    this.lastHourDeg=deg;
+                    this.lastMinuteDeg=deg%30*12;
+                    this.rotateElm(this.minutHand,this.lastMinuteDeg)
                 }else{
-                    if((270<lastMinuteDeg&&lastMinuteDeg<360&&0<=deg&&deg<90)||(270<deg&&deg<360&&0<=lastMinuteDeg&&lastMinuteDeg<90)){
-                        lastHourDeg=lastHourDeg+(deg-lastMinuteDeg-Timepicker.sign(deg-lastMinuteDeg)*360)/12;
-                        if(lastHourDeg<0)lastHourDeg+=360;
-                        lastHourDeg%=360;
-                        if(345<lastHourDeg||lastHourDeg<15)isPM=!isPM
+                    if((270<this.lastMinuteDeg&&this.lastMinuteDeg<360&&0<=deg&&deg<90)||(270<deg&&deg<360&&0<=this.lastMinuteDeg&&this.lastMinuteDeg<90)){
+                        this.lastHourDeg=this.lastHourDeg+(deg-this.lastMinuteDeg-this.sign(deg-this.lastMinuteDeg)*360)/12;
+                        if(this.lastHourDeg<0)this.lastHourDeg+=360;
+                        this.lastHourDeg%=360;
+                        //if(345<lastHourDeg||lastHourDeg<15)isPM=!isPM
                     }else{
-                        lastHourDeg=lastHourDeg+(deg-lastMinuteDeg)/12;
-                        if(lastHourDeg<0)lastHourDeg+=360;
-                        lastHourDeg%=360
+                        this.lastHourDeg = this.lastHourDeg+(deg-this.lastMinuteDeg)/12;
+                        if(this.lastHourDeg<0)this.lastHourDeg+=360;
+                        this.lastHourDeg%=360
                     }
-                    lastMinuteDeg=deg;
-                    rotateElm(hourHand,lastHourDeg)
-                } */
+                    this.lastMinuteDeg = deg;
+                    this.rotateElm(this.hourHand, this.lastHourDeg)
+                }
                 /* minute=6*lastHourDeg/180;
                 hour=~~minute;
                 minute=Math.floor((minute-hour)*60);
                 if(isPM)hour+=12;
                 updPickedTm(); */
         }
-       
+        sign(n){
+            if(isNaN(n))return NaN;
+            if(n==0)return 0;
+            if(n<0)return -1;
+            return 1
+        }
     }
     const inst = new Timepicker('hourHand','minutHand','backCan');   
+
+    const drawer = new Drawer(inst);
 }

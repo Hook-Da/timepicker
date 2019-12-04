@@ -17,7 +17,7 @@
 #minutHand{
     border:1px solid blue;
     position:absolute;
-    left:110px;
+    left:114px;
     top:30px;
     transform-origin:50% 90px;
     transform:rotate(120deg);
