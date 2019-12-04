@@ -36,7 +36,8 @@ window.onload = () =>{
             this.centerX = this.tpick.offsetLeft + this.hourHand.offsetLeft+10;
             this.centerY = this.tpick.offsetTop + this.hourHand.offsetTop+70;
 
-            
+            this.index = 0;
+            this.onPtrMove(20,60);
 
         }
         rotateElm(elm,deg){
