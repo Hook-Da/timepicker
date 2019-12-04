@@ -1,5 +1,7 @@
 .tpick{
     position:relative;
+    width:240px;
+    height:240px;
 }
 #backCan{
     border:1px solid red;
